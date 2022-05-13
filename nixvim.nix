@@ -266,9 +266,7 @@ in
     in
     mkIf cfg.enable (if nixos then {
       programs.neovim = {
-        enable = true;
-        package = mkIf (cfg.package != null) cfg.package;
-        plugins = cfg.extraPlugins;
+        configure = configure;
       };
 
       programs.nixvim.extraConfigLua = extraConfigLua;

@@ -264,14 +264,15 @@ in
 
     in
     mkIf cfg.enable (if nixos then {
-      environment.systemPackages = [ wrappedNeovim ];
       programs.neovim = {
-        configure = configure;
+        enable = true;
+        package = mkIf (cfg.package != null) cfg.package;
+        extraPackages = cfg.extraPackages;
+        extraConfig = configure.customRC;
+        plugins = cfg.extraPlugins;
       };
 
       programs.nixvim.extraConfigLua = extraConfigLua;
-
-      environment.etc."xdg/nvim/sysinit.vim".text = neovimConfig.neovimRcContent;
     } else
       (if homeManager then {
         programs.nixvim.extraConfigLua = extraConfigLua;

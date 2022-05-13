@@ -268,7 +268,6 @@ in
       programs.neovim = {
         enable = true;
         package = mkIf (cfg.package != null) cfg.package;
-        extraPackages = cfg.extraPackages;
         plugins = cfg.extraPlugins;
       };
 

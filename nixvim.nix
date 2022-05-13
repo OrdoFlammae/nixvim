@@ -191,7 +191,7 @@ in
       neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
         configure = cfg.configure;
         plugins = cfg.extraPlugins;
-        customRC = cfg.configure.customRC;
+        customRC = configure.customRC;
       };
 
       extraWrapperArgs = optionalString (cfg.extraPackages != [ ])

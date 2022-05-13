@@ -191,6 +191,7 @@ in
       neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
         configure = cfg.configure;
         plugins = cfg.extraPlugins;
+        customRC = cfg.configure.customRC;
       };
 
       extraWrapperArgs = optionalString (cfg.extraPackages != [ ])
@@ -268,11 +269,12 @@ in
         enable = true;
         package = mkIf (cfg.package != null) cfg.package;
         extraPackages = cfg.extraPackages;
-        extraConfig = configure.customRC;
         plugins = cfg.extraPlugins;
       };
 
       programs.nixvim.extraConfigLua = extraConfigLua;
+
+      environment.etc."xdg/nvim/sysinit.vim".text = neovimConfig.neovimRcContent;
     } else
       (if homeManager then {
         programs.nixvim.extraConfigLua = extraConfigLua;

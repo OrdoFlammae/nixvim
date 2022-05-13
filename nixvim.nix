@@ -198,7 +198,7 @@ in
       };
 
       suppressNotVimlConfig = p:
-      if p.type != viml then p // { config = ""; } else p;
+      if p.type != "viml" then p // { config = ""; } else p;
 
       neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
         configure = cfg.configure;

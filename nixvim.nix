@@ -202,7 +202,7 @@ in
 
       neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
         configure = cfg.configure;
-        plugins = map suppressNotVimlConfig (map normalizePlugins plugins);
+        plugins = map suppressNotVimlConfig (map normalizePlugins cfg.extraPlugins);
         customRC = configure.customRC;
       };
 

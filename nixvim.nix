@@ -92,7 +92,7 @@ in
 
       package = mkOption {
         type = types.nullOr types.package;
-        default = null;
+        default = pkgs.neovim-unwrapped;
         description = "The package to use for neovim.";
       };
 
@@ -265,8 +265,8 @@ in
 
     in
     mkIf cfg.enable (if nixos then {
+      environment.systemPackages = [ wrappedNeovim ];
       programs.neovim = {
-        enable = true;
         configure = configure;
       };
 

@@ -188,9 +188,21 @@ in
 
   config =
     let
+      normalizePlugins = x:
+      if (x ? plugin) then x
+      else {
+        type = x.type or "viml";
+        plugin = x;
+        config = "";
+        optional = false;
+      };
+
+      suppressNotVimlConfig = p:
+      if p.type != viml then p // { config = ""; } else p;
+
       neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
         configure = cfg.configure;
-        plugins = cfg.extraPlugins;
+        plugins = map suppressNotVimlConfig (map normalizePlugins plugins);
         customRC = configure.customRC;
       };
 

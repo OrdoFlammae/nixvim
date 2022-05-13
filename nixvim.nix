@@ -266,6 +266,7 @@ in
     in
     mkIf cfg.enable (if nixos then {
       programs.neovim = {
+        enable = true;
         configure = configure;
       };
 
